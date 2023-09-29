@@ -437,7 +437,7 @@
         {
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2022-01-01",
-            "name": "[format('vnet-ftp-{0}-hub', parameters('location'))]",
+            "name": "[format('vnet-ftp-{0}-hub', parameters('location'))]-001",
             "location": "[parameters('location')]",
             "properties": {
                 "addressSpace": {
@@ -550,7 +550,7 @@
         {
             "type": "Microsoft.Network/firewallPolicies",
             "apiVersion": "2022-01-01",
-            "name": "[format('fw-ftp-policies-{0}', parameters('location'))]",
+            "name": "[format('fw-ftp-policies-{0}', parameters('location'))]-001",
             "location": "[parameters('location')]",
             "properties": {
                 "sku": {
@@ -586,7 +586,7 @@
         {
             "type": "Microsoft.Network/azureFirewalls",
             "apiVersion": "2022-01-01",
-            "name": "[format('fw-ftp-{0}', parameters('location'))]",
+            "name": "[format('fw-ftp-{0}', parameters('location'))]-001",
             "location": "[parameters('location')]",
             "zones": [
                 "1",
@@ -810,7 +810,7 @@
             "condition": "[parameters('deployVpnGateway')]",
             "type": "Microsoft.Network/virtualNetworkGateways",
             "apiVersion": "2022-01-01",
-            "name": "[format('vgw-ftp-{0}-hub', parameters('location'))]",
+            "name": "[format('vgw-ftp-{0}-hub', parameters('location'))]-001",
             "location": "[parameters('location')]",
             "properties": {
                 "sku": {
@@ -1045,7 +1045,7 @@
         {
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2022-01-01",
-            "name": "[format('vnet-ftp-{0}-spoke-one', parameters('location'))]",
+            "name": "[format('vnet-ftp-{0}-spoke-one', parameters('location'))]-001",
             "location": "[parameters('location')]",
             "properties": {
                 "addressSpace": {
@@ -1228,7 +1228,7 @@
         {
             "type": "Microsoft.Network/virtualNetworks",
             "apiVersion": "2022-01-01",
-            "name": "[format('vnet-ftp-{0}-spoke-two', parameters('location'))]",
+            "name": "[format('vnet-ftp-{0}-spoke-two', parameters('location'))]-001",
             "location": "[parameters('location')]",
             "properties": {
                 "addressSpace": {
