@@ -62,45 +62,45 @@
     {
       "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
       "apiVersion": "2022-01-01",
-      "name": "[format('{0}/{1}', format('vnet-{0}-hub', parameters('location')), format('to_{0}', format('vnet-{0}-spoke-one', parameters('location'))))]",
+      "name": "[format('{0}/{1}', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')), format('to_{0}', format('vnet-{0}-{1}-spoke-one-001', parameters('clientCode'), parameters('location'))))]",
       "properties": {
         "allowForwardedTraffic": false,
         "allowGatewayTransit": false,
         "allowVirtualNetworkAccess": true,
         "useRemoteGateways": false,
         "remoteVirtualNetwork": {
-          "id": "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-spoke-one', parameters('location')))]"
+          "id": "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-spoke-one-001', parameters('clientCode'), parameters('location')))]"
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks/virtualNetworkPeerings', format('vnet-{0}-spoke-one', parameters('location')), format('to_{0}', format('vnet-{0}-hub', parameters('location'))))]",
-        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-hub', parameters('location')))]",
-        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-spoke-one', parameters('location')))]"
+        "[resourceId('Microsoft.Network/virtualNetworks/virtualNetworkPeerings', format('vnet-{0}-{1}-spoke-one-001', parameters('clientCode'), parameters('location')), format('to_{0}', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location'))))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-spoke-one-001', parameters('clientCode'), parameters('location')))]"
       ]
     },
     {
       "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
       "apiVersion": "2022-01-01",
-      "name": "[format('{0}/{1}', format('vnet-{0}-hub', parameters('location')), format('to_{0}', format('vnet-{0}-spoke-two', parameters('location'))))]",
+      "name": "[format('{0}/{1}', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')), format('to_{0}', format('vnet-{0}-{1}-spoke-two-001', parameters('clientCode'), parameters('location'))))]",
       "properties": {
         "allowForwardedTraffic": false,
         "allowGatewayTransit": false,
         "allowVirtualNetworkAccess": true,
         "useRemoteGateways": false,
         "remoteVirtualNetwork": {
-          "id": "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-spoke-two', parameters('location')))]"
+          "id": "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-spoke-two-001', parameters('clientCode'), parameters('location')))]"
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks/virtualNetworkPeerings', format('vnet-{0}-spoke-two', parameters('location')), format('to_{0}', format('vnet-{0}-hub', parameters('location'))))]",
-        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-hub', parameters('location')))]",
-        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-spoke-two', parameters('location')))]"
+        "[resourceId('Microsoft.Network/virtualNetworks/virtualNetworkPeerings', format('vnet-{0}-{1}-spoke-two-001', parameters('clientCode'), parameters('location')), format('to_{0}', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location'))))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-spoke-two-001', parameters('clientCode'), parameters('location')))]"
       ]
     },
     {
       "type": "Microsoft.Network/firewallPolicies/ruleCollectionGroups",
       "apiVersion": "2022-01-01",
-      "name": "[format('{0}/{1}', format('fw-policies-{0}', parameters('location')), 'DefaultNetworkRuleCollectionGroup')]",
+      "name": "[format('{0}/{1}', format('fw-policies-{0}-{1}-001', parameters('clientCode'), parameters('location')), 'DefaultNetworkRuleCollectionGroup')]",
       "properties": {
         "priority": 200,
         "ruleCollections": [
@@ -137,13 +137,13 @@
         ]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/firewallPolicies', format('fw-policies-{0}', parameters('location')))]"
+        "[resourceId('Microsoft.Network/firewallPolicies', format('fw-policies-{0}-{1}-001', parameters('clientCode'), parameters('location')))]"
       ]
     },
     {
       "type": "Microsoft.Network/firewallPolicies/ruleCollectionGroups",
       "apiVersion": "2022-01-01",
-      "name": "[format('{0}/{1}', format('fw-policies-{0}', parameters('location')), 'DefaultApplicationRuleCollectionGroup')]",
+      "name": "[format('{0}/{1}', format('fw-policies-{0}-{1}-001', parameters('clientCode'), parameters('location')), 'DefaultApplicationRuleCollectionGroup')]",
       "properties": {
         "priority": 300,
         "ruleCollections": [
@@ -159,44 +159,44 @@
         ]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/firewallPolicies/ruleCollectionGroups', format('fw-policies-{0}', parameters('location')), 'DefaultNetworkRuleCollectionGroup')]",
-        "[resourceId('Microsoft.Network/firewallPolicies', format('fw-policies-{0}', parameters('location')))]"
+        "[resourceId('Microsoft.Network/firewallPolicies/ruleCollectionGroups', format('fw-policies-{0}-{1}-001', parameters('clientCode'), parameters('location')), 'DefaultNetworkRuleCollectionGroup')]",
+        "[resourceId('Microsoft.Network/firewallPolicies', format('fw-policies-{0}-{1}-001', parameters('clientCode'), parameters('location')))]"
       ]
     },
     {
       "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
       "apiVersion": "2022-01-01",
-      "name": "[format('{0}/{1}', format('vnet-{0}-spoke-one', parameters('location')), format('to_{0}', format('vnet-{0}-hub', parameters('location'))))]",
+      "name": "[format('{0}/{1}', format('vnet-{0}-{1}-spoke-one-001', parameters('clientCode'), parameters('location')), format('to_{0}', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location'))))]",
       "properties": {
         "allowForwardedTraffic": false,
         "allowGatewayTransit": false,
         "allowVirtualNetworkAccess": true,
         "useRemoteGateways": false,
         "remoteVirtualNetwork": {
-          "id": "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-hub', parameters('location')))]"
+          "id": "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')))]"
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-hub', parameters('location')))]",
-        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-spoke-one', parameters('location')))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-spoke-one-001', parameters('clientCode'), parameters('location')))]"
       ]
     },
     {
       "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
       "apiVersion": "2022-01-01",
-      "name": "[format('{0}/{1}', format('vnet-{0}-spoke-two', parameters('location')), format('to_{0}', format('vnet-{0}-hub', parameters('location'))))]",
+      "name": "[format('{0}/{1}', format('vnet-{0}-{1}-spoke-two-001', parameters('clientCode'), parameters('location')), format('to_{0}', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location'))))]",
       "properties": {
         "allowForwardedTraffic": false,
         "allowGatewayTransit": false,
         "allowVirtualNetworkAccess": true,
         "useRemoteGateways": false,
         "remoteVirtualNetwork": {
-          "id": "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-hub', parameters('location')))]"
+          "id": "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')))]"
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-hub', parameters('location')))]",
-        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-spoke-two', parameters('location')))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')))]",
+        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-spoke-two-001', parameters('clientCode'), parameters('location')))]"
       ]
     },
     {
@@ -443,7 +443,7 @@
     {
       "type": "Microsoft.Network/virtualNetworks",
       "apiVersion": "2022-01-01",
-      "name": "[format('vnet-{0}-hub', parameters('location'))]",
+      "name": "[format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location'))]",
       "location": "[parameters('location')]",
       "properties": {
         "addressSpace": {
@@ -485,7 +485,7 @@
     {
       "type": "Microsoft.Insights/diagnosticSettings",
       "apiVersion": "2021-05-01-preview",
-      "scope": "[format('Microsoft.Network/virtualNetworks/{0}', format('vnet-{0}-hub', parameters('location')))]",
+      "scope": "[format('Microsoft.Network/virtualNetworks/{0}', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')))]",
       "name": "to-hub-la",
       "properties": {
         "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', format('la-hub-{0}-{1}', parameters('location'), variables('suffix')))]",
@@ -498,7 +498,7 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.OperationalInsights/workspaces', format('la-hub-{0}-{1}', parameters('location'), variables('suffix')))]",
-        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-hub', parameters('location')))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')))]"
       ]
     },
     {
@@ -556,7 +556,7 @@
     {
       "type": "Microsoft.Network/firewallPolicies",
       "apiVersion": "2022-01-01",
-      "name": "[format('fw-policies-{0}', parameters('location'))]",
+      "name": "[format('fw-policies-{0}-{1}-001', parameters('clientCode'), parameters('location'))]",
       "location": "[parameters('location')]",
       "properties": {
         "sku": {
@@ -592,7 +592,7 @@
     {
       "type": "Microsoft.Network/azureFirewalls",
       "apiVersion": "2022-01-01",
-      "name": "[format('fw-{0}', parameters('location'))]",
+      "name": "[format('fw-{0}-{1}-001', parameters('clientCode'), parameters('location'))]",
       "location": "[parameters('location')]",
       "zones": [
         "1",
@@ -607,7 +607,7 @@
             "input": {
               "name": "[format('pip-fw-{0}-{1}', parameters('location'), padLeft(range(0, variables('numFirewallIpAddressesToAssign'))[range(0, variables('numFirewallIpAddressesToAssign'))[copyIndex('ipConfigurations')]], 2, '0'))]",
               "properties": {
-                "subnet": "[if(equals(0, range(0, variables('numFirewallIpAddressesToAssign'))[copyIndex('ipConfigurations')]), createObject('id', resourceId('Microsoft.Network/virtualNetworks/subnets', format('vnet-{0}-hub', parameters('location')), 'AzureFirewallSubnet')), null())]",
+                "subnet": "[if(equals(0, range(0, variables('numFirewallIpAddressesToAssign'))[copyIndex('ipConfigurations')]), createObject('id', resourceId('Microsoft.Network/virtualNetworks/subnets', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')), 'AzureFirewallSubnet')), null())]",
                 "publicIPAddress": {
                   "id": "[resourceId('Microsoft.Network/publicIPAddresses', format('pip-fw-{0}-{1}', parameters('location'), padLeft(range(0, variables('numFirewallIpAddressesToAssign'))[range(0, variables('numFirewallIpAddressesToAssign'))[copyIndex('ipConfigurations')]], 2, '0')))]"
                 }
@@ -620,15 +620,15 @@
           "tier": "Standard"
         },
         "firewallPolicy": {
-          "id": "[resourceId('Microsoft.Network/firewallPolicies', format('fw-policies-{0}', parameters('location')))]"
+          "id": "[resourceId('Microsoft.Network/firewallPolicies', format('fw-policies-{0}-{1}-001', parameters('clientCode'), parameters('location')))]"
         }
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/firewallPolicies/ruleCollectionGroups', format('fw-policies-{0}', parameters('location')), 'DefaultApplicationRuleCollectionGroup')]",
-        "[resourceId('Microsoft.Network/firewallPolicies/ruleCollectionGroups', format('fw-policies-{0}', parameters('location')), 'DefaultNetworkRuleCollectionGroup')]",
-        "[resourceId('Microsoft.Network/firewallPolicies', format('fw-policies-{0}', parameters('location')))]",
+        "[resourceId('Microsoft.Network/firewallPolicies/ruleCollectionGroups', format('fw-policies-{0}-{1}-001', parameters('clientCode'), parameters('location')), 'DefaultApplicationRuleCollectionGroup')]",
+        "[resourceId('Microsoft.Network/firewallPolicies/ruleCollectionGroups', format('fw-policies-{0}-{1}-001', parameters('clientCode'), parameters('location')), 'DefaultNetworkRuleCollectionGroup')]",
+        "[resourceId('Microsoft.Network/firewallPolicies', format('fw-policies-{0}-{1}-001', parameters('clientCode'), parameters('location')))]",
         "pipsAzureFirewall",
-        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-hub', parameters('location')))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')))]"
       ],
       "metadata": {
         "description": "This is the regional Azure Firewall that all regional spoke networks can egress through."
@@ -637,7 +637,7 @@
     {
       "type": "Microsoft.Insights/diagnosticSettings",
       "apiVersion": "2021-05-01-preview",
-      "scope": "[format('Microsoft.Network/azureFirewalls/{0}', format('fw-{0}', parameters('location')))]",
+      "scope": "[format('Microsoft.Network/azureFirewalls/{0}', format('fw-{0}-{1}-001', parameters('clientCode'), parameters('location')))]",
       "name": "to-hub-la",
       "properties": {
         "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', format('la-hub-{0}-{1}', parameters('location'), variables('suffix')))]",
@@ -655,7 +655,7 @@
         ]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/azureFirewalls', format('fw-{0}', parameters('location')))]",
+        "[resourceId('Microsoft.Network/azureFirewalls', format('fw-{0}-{1}-001', parameters('clientCode'), parameters('location')))]",
         "[resourceId('Microsoft.OperationalInsights/workspaces', format('la-hub-{0}-{1}', parameters('location'), variables('suffix')))]"
       ]
     },
@@ -721,7 +721,7 @@
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "subnet": {
-                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', format('vnet-{0}-hub', parameters('location')), 'AzureBastionSubnet')]"
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')), 'AzureBastionSubnet')]"
               },
               "publicIPAddress": {
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', format('pip-ab-{0}', parameters('location')))]"
@@ -732,7 +732,7 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Network/publicIPAddresses', format('pip-ab-{0}', parameters('location')))]",
-        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-hub', parameters('location')))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')))]"
       ],
       "metadata": {
         "description": "This regional hub's Azure Bastion service. NSGs are configured to allow Bastion to reach any resource subnet in peered spokes."
@@ -816,7 +816,7 @@
       "condition": "[parameters('deployVpnGateway')]",
       "type": "Microsoft.Network/virtualNetworkGateways",
       "apiVersion": "2022-01-01",
-      "name": "[format('vgw-{0}-hub', parameters('location'))]",
+      "name": "[format('vgw-{0}-{1}-hub-001', parameters('clientCode'), parameters('location'))]",
       "location": "[parameters('location')]",
       "properties": {
         "sku": {
@@ -835,7 +835,7 @@
                 "id": "[resourceId('Microsoft.Network/publicIPAddresses', format('pip-vgw-{0}', parameters('location')))]"
               },
               "subnet": {
-                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', format('vnet-{0}-hub', parameters('location')), 'GatewaySubnet')]"
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')), 'GatewaySubnet')]"
               }
             }
           }
@@ -843,7 +843,7 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.Network/publicIPAddresses', format('pip-vgw-{0}', parameters('location')))]",
-        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-hub', parameters('location')))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')))]"
       ],
       "metadata": {
         "description": "The is the regional VPN gateway, configured with basic settings. Only deployed if requested."
@@ -853,7 +853,7 @@
       "condition": "[parameters('deployVpnGateway')]",
       "type": "Microsoft.Insights/diagnosticSettings",
       "apiVersion": "2021-05-01-preview",
-      "scope": "[format('Microsoft.Network/virtualNetworkGateways/{0}', format('vgw-{0}-hub', parameters('location')))]",
+      "scope": "[format('Microsoft.Network/virtualNetworkGateways/{0}', format('vgw-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')))]",
       "name": "to-hub-la",
       "properties": {
         "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', format('la-hub-{0}-{1}', parameters('location'), variables('suffix')))]",
@@ -872,7 +872,7 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.OperationalInsights/workspaces', format('la-hub-{0}-{1}', parameters('location'), variables('suffix')))]",
-        "[resourceId('Microsoft.Network/virtualNetworkGateways', format('vgw-{0}-hub', parameters('location')))]"
+        "[resourceId('Microsoft.Network/virtualNetworkGateways', format('vgw-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')))]"
       ]
     },
     {
@@ -887,13 +887,13 @@
             "properties": {
               "nextHopType": "VirtualAppliance",
               "addressPrefix": "0.0.0.0/0",
-              "nextHopIpAddress": "[reference(resourceId('Microsoft.Network/azureFirewalls', format('fw-{0}', parameters('location')))).ipConfigurations[0].properties.privateIPAddress]"
+              "nextHopIpAddress": "[reference(resourceId('Microsoft.Network/azureFirewalls', format('fw-{0}-{1}-001', parameters('clientCode'), parameters('location')))).ipConfigurations[0].properties.privateIPAddress]"
             }
           }
         ]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/azureFirewalls', format('fw-{0}', parameters('location')))]"
+        "[resourceId('Microsoft.Network/azureFirewalls', format('fw-{0}-{1}-001', parameters('clientCode'), parameters('location')))]"
       ],
       "metadata": {
         "description": "Next hop to the regional hub's Azure Firewall"
@@ -911,7 +911,7 @@
             "properties": {
               "protocol": "Tcp",
               "sourcePortRange": "*",
-              "sourceAddressPrefix": "[reference(resourceId('Microsoft.Network/virtualNetworks/subnets', format('vnet-{0}-hub', parameters('location')), 'AzureBastionSubnet'), '2022-01-01').addressPrefix]",
+              "sourceAddressPrefix": "[reference(resourceId('Microsoft.Network/virtualNetworks/subnets', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')), 'AzureBastionSubnet'), '2022-01-01').addressPrefix]",
               "destinationPortRanges": [
                 "3389"
               ],
@@ -926,7 +926,7 @@
             "properties": {
               "protocol": "Tcp",
               "sourcePortRange": "*",
-              "sourceAddressPrefix": "[reference(resourceId('Microsoft.Network/virtualNetworks/subnets', format('vnet-{0}-hub', parameters('location')), 'AzureBastionSubnet'), '2022-01-01').addressPrefix]",
+              "sourceAddressPrefix": "[reference(resourceId('Microsoft.Network/virtualNetworks/subnets', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')), 'AzureBastionSubnet'), '2022-01-01').addressPrefix]",
               "destinationPortRanges": [
                 "22"
               ],
@@ -952,7 +952,7 @@
         ]
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-hub', parameters('location')))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-hub-001', parameters('clientCode'), parameters('location')))]"
       ],
       "metadata": {
         "description": "NSG on the resource subnet (just using a common one for all as an example, but usually would be based on the specific needs of the spoke)."
@@ -1051,7 +1051,7 @@
     {
       "type": "Microsoft.Network/virtualNetworks",
       "apiVersion": "2022-01-01",
-      "name": "[format('vnet-{0}-spoke-one', parameters('location'))]",
+      "name": "[format('vnet-{0}-{1}-spoke-one-001', parameters('clientCode'), parameters('location'))]",
       "location": "[parameters('location')]",
       "properties": {
         "addressSpace": {
@@ -1099,7 +1099,7 @@
     {
       "type": "Microsoft.Insights/diagnosticSettings",
       "apiVersion": "2021-05-01-preview",
-      "scope": "[format('Microsoft.Network/virtualNetworks/{0}', format('vnet-{0}-spoke-one', parameters('location')))]",
+      "scope": "[format('Microsoft.Network/virtualNetworks/{0}', format('vnet-{0}-{1}-spoke-one-001', parameters('clientCode'), parameters('location')))]",
       "name": "to-hub-la",
       "properties": {
         "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', format('la-hub-{0}-{1}', parameters('location'), variables('suffix')))]",
@@ -1112,7 +1112,7 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.OperationalInsights/workspaces', format('la-hub-{0}-{1}', parameters('location'), variables('suffix')))]",
-        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-spoke-one', parameters('location')))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-spoke-one-001', parameters('clientCode'), parameters('location')))]"
       ]
     },
     {
@@ -1127,7 +1127,7 @@
             "name": "default",
             "properties": {
               "subnet": {
-                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', format('vnet-{0}-spoke-one', parameters('location')), 'snet-resources')]"
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', format('vnet-{0}-{1}-spoke-one-001', parameters('clientCode'), parameters('location')), 'snet-resources')]"
               },
               "privateIPAllocationMethod": "Dynamic"
             }
@@ -1136,7 +1136,7 @@
         "enableAcceleratedNetworking": true
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-spoke-one', parameters('location')))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-spoke-one-001', parameters('clientCode'), parameters('location')))]"
       ],
       "metadata": {
         "description": "The private Network Interface Card for the linux VM in spoke one."
@@ -1234,7 +1234,7 @@
     {
       "type": "Microsoft.Network/virtualNetworks",
       "apiVersion": "2022-01-01",
-      "name": "[format('vnet-{0}-spoke-two', parameters('location'))]",
+      "name": "[format('vnet-{0}-{1}-spoke-two-001', parameters('clientCode'), parameters('location'))]",
       "location": "[parameters('location')]",
       "properties": {
         "addressSpace": {
@@ -1282,7 +1282,7 @@
     {
       "type": "Microsoft.Insights/diagnosticSettings",
       "apiVersion": "2021-05-01-preview",
-      "scope": "[format('Microsoft.Network/virtualNetworks/{0}', format('vnet-{0}-spoke-two', parameters('location')))]",
+      "scope": "[format('Microsoft.Network/virtualNetworks/{0}', format('vnet-{0}-{1}-spoke-two-001', parameters('clientCode'), parameters('location')))]",
       "name": "to-hub-la",
       "properties": {
         "workspaceId": "[resourceId('Microsoft.OperationalInsights/workspaces', format('la-hub-{0}-{1}', parameters('location'), variables('suffix')))]",
@@ -1295,7 +1295,7 @@
       },
       "dependsOn": [
         "[resourceId('Microsoft.OperationalInsights/workspaces', format('la-hub-{0}-{1}', parameters('location'), variables('suffix')))]",
-        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-spoke-two', parameters('location')))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-spoke-two-001', parameters('clientCode'), parameters('location')))]"
       ]
     },
     {
@@ -1310,7 +1310,7 @@
             "name": "default",
             "properties": {
               "subnet": {
-                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', format('vnet-{0}-spoke-two', parameters('location')), 'snet-resources')]"
+                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', format('vnet-{0}-{1}-spoke-two-001', parameters('clientCode'), parameters('location')), 'snet-resources')]"
               },
               "privateIPAllocationMethod": "Dynamic"
             }
@@ -1319,7 +1319,7 @@
         "enableAcceleratedNetworking": true
       },
       "dependsOn": [
-        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-spoke-two', parameters('location')))]"
+        "[resourceId('Microsoft.Network/virtualNetworks', format('vnet-{0}-{1}-spoke-two-001', parameters('clientCode'), parameters('location')))]"
       ],
       "metadata": {
         "description": "The private Network Interface Card for the Windows VM in spoke two."
